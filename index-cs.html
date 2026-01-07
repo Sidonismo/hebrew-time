@@ -378,11 +378,56 @@
             font-size: 0.9rem;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle:hover {
+            color: var(--primary-color);
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            nav .container {
+                flex-wrap: wrap;
+            }
+
             nav .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            nav .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .lang-switch {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
             }
 
             .hero h1 {
@@ -393,16 +438,73 @@
                 font-size: 1rem;
             }
 
+            .hero p.slogan {
+                font-size: 1.2rem;
+            }
+
+            .hero-icon {
+                width: 120px;
+                height: 120px;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
             section h2 {
-                font-size: 2rem;
+                font-size: 1.75rem;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .screenshot-item img {
-                height: 400px;
+                height: 350px;
+            }
+
+            .guide-item h3 {
+                font-size: 1.5rem;
+            }
+
+            .guide-item h4 {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero p.slogan {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .screenshot-item img {
+                height: 300px;
+            }
+
+            .cta-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            nav .logo {
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -412,7 +514,8 @@
     <nav>
         <div class="container">
             <div class="logo">⏰ Hebrew Time</div>
-            <ul class="nav-links">
+            <button class="mobile-menu-toggle" aria-label="Přepnout menu">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#funkce">Funkce</a></li>
                 <li><a href="#screenshoty">Screenshoty</a></li>
                 <li><a href="#navod">Návod</a></li>
@@ -478,8 +581,8 @@
 
                 <div class="feature-card">
                     <div class="feature-icon">📍</div>
-                    <h3>Manuální zadání GPS</h3>
-                    <p>Zadejte vlastní GPS souřadnice ručně nebo vyberte z 38 předdefinovaných měst po celém světě.</p>
+                    <h3>Inteligentní detekce polohy</h3>
+                    <p>Automatická detekce GPS polohy s možností ručního zadání vlastních souřadnic nebo výběru z 38 předdefinovaných měst po celém světě.</p>
                 </div>
 
                 <div class="feature-card">
@@ -696,7 +799,7 @@
                     <p>Potřebujete pomoc nebo máte návrhy?</p>
                     <ul>
                         <li><strong>Email:</strong> <a href="mailto:hebrewtime@email.cz" style="color: var(--primary-color);">hebrewtime@email.cz</a></li>
-                        <li><strong>Zásady ochrany osobních údajů:</strong> <a href="https://sidonismo.github.io/hebrew-time/" style="color: var(--primary-color);">Zobrazit zásady ochrany osobních údajů</a> (Aktualizováno 1. ledna 2026)</li>
+                        <li><strong>Zásady ochrany osobních údajů:</strong> <a href="privacy-policy.html" style="color: var(--primary-color);">Zobrazit zásady ochrany osobních údajů</a> (Aktualizováno 1. ledna 2026)</li>
                     </ul>
                     <p>Obvykle odpovídáme do 24-48 hodin.</p>
                 </div>
@@ -725,11 +828,37 @@
         <div class="container">
             <p>&copy; 2026 Eliáš Sidon. Všechna práva vyhrazena.</p>
             <p>
-                <a href="https://sidonismo.github.io/hebrew-time/README.md">Zásady ochrany osobních údajů</a> |
+                <a href="privacy-policy.html">Zásady ochrany osobních údajů</a> |
+                <a href="podminky-uzivani.html">Podmínky používání</a> |
                 <a href="mailto:hebrewtime@email.cz">Kontakt</a> |
                 <a href="index.html">🇬🇧 English version</a>
             </p>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const menuLinks = navLinks.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
