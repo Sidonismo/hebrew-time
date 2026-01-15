@@ -1,6 +1,6 @@
 # PRIVACY POLICY
 
-**Last updated January 01, 2026**
+**Last updated January 15, 2026**
 
 This Privacy Notice for Eliáš Sidon (doing business as Hebrew Time) ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:
 
@@ -14,10 +14,11 @@ Key features include:
 - Jewish calendar with holidays and parasha information
 - Zemanim (halachic times) calculation using GPS coordinates
 - Shabbat and Jewish holiday notifications
+- Personal calendar events with Google Calendar sync
 - 5 customizable clock skins
 - Optional in-app purchase for premium features
 
-The app collects device location data solely to calculate accurate sunrise/sunset times for the user's geographic position. Location data is stored locally on the device and is not transmitted to external servers. The app uses Google Play Billing for optional premium purchases.
+The app collects device location data solely to calculate accurate sunrise/sunset times for the user's geographic position. Location data is stored locally on the device and is not transmitted to external servers. Calendar event data is created and stored locally on the device and can be synced with Google Calendar when the user is authenticated. The app uses Google Play Billing for optional premium purchases.
 
 **Questions or concerns?** Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at hebrewtime@email.cz.
 
@@ -83,6 +84,8 @@ We collect personal information that you voluntarily provide to us when you expr
 
 - *Push Notifications.* We may request to send you push notifications regarding your account or certain features of the application(s). If you wish to opt out from receiving these types of communications, you may turn them off in your device's settings.
 
+- *Calendar Data.* If you use the personal calendar feature in our application, we request access to your device's calendar to create, read, modify, and delete calendar events. Calendar event data includes event title, date, time, and description. This data is stored locally on your device. If you authenticate with your Google account, your calendar events may be synced with Google Calendar. You can manage which calendars are accessible to the app through your device's settings, and you can delete events directly through the app.
+
 This information is primarily needed to maintain the security and operation of our application(s), for troubleshooting, and for our internal analytics and reporting purposes.
 
 All personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.
@@ -99,7 +102,7 @@ The information we collect includes:
 
 ### Google API
 
-Our use of information received from Google APIs will adhere to Google API Services User Data Policy, including the Limited Use requirements.
+Our use of information received from Google APIs (including Google Calendar API) will adhere to Google API Services User Data Policy, including the Limited Use requirements. When you sync calendar events with Google Calendar, your event data is transmitted to Google according to Google's privacy policies. You can review Google's privacy policy at https://policies.google.com/privacy.
 
 ---
 
@@ -189,7 +192,7 @@ We have implemented measures to protect your personal information, including by 
 
 We will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements).
 
-Location data and preferences are stored locally on the user's device and are retained until the app is uninstalled or the user clears app data.
+Location data and preferences are stored locally on the user's device and are retained until the app is uninstalled or the user clears app data. Calendar events are stored locally on the user's device and retained indefinitely until deleted by the user or the app data is cleared. If synced with Google Calendar, calendar event data will remain in your Google Calendar account according to Google's data retention policies.
 
 When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
 
@@ -258,6 +261,7 @@ We have collected the following categories of personal information in the past t
 | E. Biometric information | Fingerprints and voiceprints | NO |
 | F. Internet or other similar network activity | Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems, and advertisements | NO |
 | G. Geolocation data | Device location | YES |
+| G2. Calendar and event data | Calendar event titles, dates, times, descriptions, and sync status with Google Calendar | YES |
 | H. Audio, electronic, sensory, or similar information | Images and audio, video or call recordings created in connection with our business activities | NO |
 | I. Professional or employment-related information | Business contact details in order to provide you our Services at a business level or job title, work history, and professional qualifications if you apply for a job with us | NO |
 | J. Education Information | Student records and directory information | NO |
@@ -266,6 +270,7 @@ We have collected the following categories of personal information in the past t
 
 We will use and retain the collected personal information as needed to provide the Services or for:
 - Category G - Until the app is uninstalled or app data is cleared by the user
+- Category G2 - Indefinitely until deleted by user or app data is cleared; synced Google Calendar events follow Google's retention policies
 
 ### Your Rights
 
