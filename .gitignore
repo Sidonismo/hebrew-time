@@ -1,0 +1,17 @@
+# Konfigurační soubory s hesly (extrémně důležité!)
+.env
+config.php
+settings.local.php
+
+# Složky s knihovnami (stahují se znovu přes composer/npm)
+vendor/
+node_modules/
+
+# Logy a dočasné soubory
+*.log
+tmp/
+cache/
+.DS_Store
+
+# Pokud máte nahrané obrázky od uživatelů, které nechcete v kódu
+uploads/
