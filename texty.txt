@@ -1,0 +1,2 @@
+Potřebuji přidat osobní příběh k android aplikaci s widgetem hodin, které jdou oproti všedním hodinám zrcadlově rtl.
+Od dětství jsem členem židovské pražské komunity a chodil jsem do známé maharalovy synagogy Altneu Schul / Staronové, kde je na půdě "vypnutý" golem na střeše synagogy, protože mu rabi low vyjmul šem hameforaš. Na židovské radnici jsou do dnes podobné hodiny, jako můj widget s hebrejštinou, které jdou po směru rtl. Hodiny shlížejí přímo na tajemnou půdu, kam nesmí živáček vkročit. Každý člen naší komunity je na hodiny zvyklý.
