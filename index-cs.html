@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hebrew Time - Inovativní Android widget s hebrejským kalendářem, analogovými hodinami s hebrejskými číslicemi a přesnými halachickými časy (zemanim)">
+    <meta name="keywords" content="Hebrejský kalendář, židovský kalendář, zemanim, halachické časy, hebrejský widget, Android, časy šabatu">
+    <meta name="author" content="Eliáš Sidon">
+    <title>Hebrew Time - Widget s hebrejským kalendářem pro Android</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FFD600;
+            --secondary-color: #FFEA00;
+            --dark-bg: #1a1a2e;
+            --darker-bg: #0f0f1e;
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --accent-blue: #4169E1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--darker-bg);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            background: var(--dark-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 214, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 214, 0, 0.3);
+        }
+
+        .hero-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--darker-bg);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 214, 0, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 214, 0, 0.6);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--dark-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 214, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+        }
+
+        /* User Guide Section */
+        .guide-section {
+            background: var(--dark-bg);
+        }
+
+        .guide-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .guide-item {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 214, 0, 0.1);
+        }
+
+        .guide-item:last-child {
+            border-bottom: none;
+        }
+
+        .guide-item h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .guide-item h4 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--secondary-color);
+        }
+
+        .guide-item p {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .guide-item ul {
+            margin-left: 2rem;
+            color: var(--text-gray);
+        }
+
+        .guide-item ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-item code {
+            background: var(--darker-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            color: var(--secondary-color);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            text-align: center;
+        }
+
+        .download-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--darker-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .badge:hover {
+            background: var(--primary-color);
+            color: var(--darker-bg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 214, 0, 0.2);
+        }
+
+        footer p {
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Screenshots Section */
+        .screenshots-section {
+            background: var(--darker-bg);
+        }
+
+        .screenshots-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 2rem 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--dark-bg);
+        }
+
+        .screenshots-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshots-container::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+            border-radius: 10px;
+        }
+
+        .screenshots-container::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .screenshot-item {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            text-align: center;
+        }
+
+        .screenshot-item img {
+            height: 500px;
+            width: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .screenshot-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-caption {
+            margin-top: 1rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav .container {
+                flex-wrap: wrap;
+            }
+
+            nav .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem 0;
+                text-align: center;
+            }
+
+            nav .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .lang-switch {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero p.slogan {
+                font-size: 1.2rem;
+            }
+
+            .hero-icon {
+                width: 120px;
+                height: 120px;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            section h2 {
+                font-size: 1.75rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .screenshot-item img {
+                height: 350px;
+            }
+
+            .guide-item h3 {
+                font-size: 1.5rem;
+            }
+
+            .guide-item h4 {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero p.slogan {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .screenshot-item img {
+                height: 300px;
+            }
+
+            .cta-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            nav .logo {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">⏰ Hebrew Time</div>
+            <button class="mobile-menu-toggle" aria-label="Přepnout menu">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#funkce">Funkce</a></li>
+                <li><a href="#screenshoty">Screenshoty</a></li>
+                <li><a href="#navod">Návod</a></li>
+                <li><a href="#stahnout">Stáhnout</a></li>
+                <li class="lang-switch"><a href="index.html">🇬🇧 English</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-icon">
+                <img src="assets/logo.png" alt="Hebrew Time Logo">
+            </div>
+            <h1>Hebrew Time</h1>
+            <p class="slogan" style="font-size: 1.5rem; font-style: italic; color: var(--primary-color); margin-bottom: 1rem;">Čas, jenž se vrací ke svému počátku</p>
+            <p style="font-size: 1.2rem; font-weight: bold; color: var(--secondary-color); margin-bottom: 1rem;">První hebrejský analogový widget s pohybem proti směru hodinových ručiček!</p>
+            <p>Ultimátní widget s hebrejským kalendářem pro Android s přesnými halachickými časy (zemanim) a krásnými přizpůsobitelnými motivy.</p>
+            <a href="#stahnout" class="cta-button">Stáhnout nyní</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="funkce">
+        <div class="container">
+            <h2>Funkce</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🕐</div>
+                    <h3>Světově první hebrejské hodiny proti směru ručiček</h3>
+                    <p>První analogový widget s hebrejskými číslicemi (gematrií), které se pohybují proti směru hodinových ručiček podle tradičního hebrejského směru čtení zprava doleva.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Integrace hebrejského kalendáře</h3>
+                    <p>Kompletní hebrejský kalendář s židovskými svátky, parashat ha-šavua a automatickou detekcí Izrael/diaspora na základě vaší GPS polohy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌅</div>
+                    <h3>Přesný výpočet zemanů</h3>
+                    <p>Přesné halachické časy včetně východu slunce, západu slunce, času zapálení svíček a havdaly vypočítané z vašich GPS souřadnic.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Notifikace šabatu a svátků</h3>
+                    <p>Nikdy nezmeškáte šabat nebo židovský svátek díky upozorněním 24 hodin a 30 minut před časem zapálení svíček.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>5 krásných motivů hodin</h3>
+                    <p>Vyberte si z 5 profesionálně navržených motivů hodin s živým náhledem a okamžitým přepínáním.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Přizpůsobitelné zobrazení</h3>
+                    <p>Možnosti zobrazení dat s latinskými názvy měsíců a arabskými číslicemi pro snazší čtení vedle hebrejštiny.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Inteligentní detekce polohy</h3>
+                    <p>Automatická detekce GPS polohy s možností ručního zadání vlastních souřadnic nebo výběru z 38 předdefinovaných měst po celém světě.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Prémiové funkce</h3>
+                    <p>Odemkněte všechny motivy a pokročilé funkce pomocí jednorázového nákupu za $4.99. Bezplatná verze zahrnuje základní funkce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshoty" class="screenshots-section">
+        <div class="container">
+            <h2>Podívejte se na Hebrew Time v akci</h2>
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 2rem;">Přejeďte pro zobrazení všech funkcí</p>
+            <div class="screenshots-container">
+                <div class="screenshot-item">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194459.png" alt="Hebrew Time Widget na domovské obrazovce">
+                    <p class="screenshot-caption">Widget na domovské obrazovce</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194509.png" alt="Zemanim - Halachické časy">
+                    <p class="screenshot-caption">Zemanim - Halachické časy</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194522.png" alt="Hebrejský kalendář se svátky">
+                    <p class="screenshot-caption">Hebrejský kalendář se svátky</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194552.png" alt="Detail data kalendáře">
+                    <p class="screenshot-caption">Detail data s zemany</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194610.png" alt="5 motivů hodin na výběr">
+                    <p class="screenshot-caption">5 krásných motivů hodin</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194818.png" alt="Zobrazení Hebrew Time Widgetu">
+                    <p class="screenshot-caption">Hodiny běžící proti směru ručiček</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Guide Section -->
+    <section id="navod" class="guide-section">
+        <div class="container">
+            <h2>Uživatelský návod</h2>
+            <div class="guide-content">
+
+                <div class="guide-item">
+                    <h3>📱 Instalace a nastavení</h3>
+                    <h4>Instalace aplikace</h4>
+                    <p>Stáhněte si Hebrew Time z Google Play Store a nainstalujte ji na své zařízení Android (vyžaduje Android 7.0 nebo vyšší).</p>
+
+                    <h4>Přidání widgetu</h4>
+                    <ul>
+                        <li>Dlouze stiskněte prázdné místo na domovské obrazovce</li>
+                        <li>Vyberte "Widgety" z nabídky</li>
+                        <li>Najděte "Hebrew Time" v seznamu widgetů</li>
+                        <li>Přetáhněte jej na požadované místo na domovské obrazovce</li>
+                        <li>Widget automaticky začne zobrazovat aktuální čas a hebrejské datum</li>
+                    </ul>
+
+                    <h4>Udělení oprávnění</h4>
+                    <p>Pro přesný výpočet zemanů potřebuje aplikace oprávnění k poloze:</p>
+                    <ul>
+                        <li>Přejděte na záložku Nastavení v aplikaci</li>
+                        <li>Klepněte na "Povolit polohu", pokud ještě není uděleno</li>
+                        <li>Vyberte "Při používání aplikace" nebo "Vždy" pro nejlepší zážitek</li>
+                    </ul>
+                </div>
+
+                <div class="guide-item">
+                    <h3>⏰ Použití záložky Zemanim</h3>
+                    <p>Záložka Zemanim zobrazuje všechny halachické časy pro aktuální den na základě vaší polohy:</p>
+                    <ul>
+                        <li><strong>Alot ha-šachar</strong> - Úsvit (72 minut před východem slunce)</li>
+                        <li><strong>Mišejakir</strong> - Nejčasnější čas pro talit a tefilin</li>
+                        <li><strong>Východ slunce (Nec)</strong> - Přesný čas východu slunce</li>
+                        <li><strong>Šema (MGA/GRA)</strong> - Nejzazší čas pro Šema podle různých názorů</li>
+                        <li><strong>Tefila (MGA/GRA)</strong> - Nejzazší čas pro ranní modlitbu</li>
+                        <li><strong>Chacot</strong> - Poledne (sluneční poledne)</li>
+                        <li><strong>Mincha gedola/ketana</strong> - Nejčasnější časy pro odpolední modlitbu</li>
+                        <li><strong>Plag ha-mincha</strong> - 1,25 hodiny před západem slunce</li>
+                        <li><strong>Západ slunce (Škia)</strong> - Přesný čas západu slunce</li>
+                        <li><strong>Cet ha-kochavim</strong> - Soumrak (kdy se objeví hvězdy)</li>
+                        <li><strong>Zapálení svíček</strong> - 18 minut před západem slunce (v pátek/svátky)</li>
+                        <li><strong>Havdala</strong> - 42 minut po západu slunce (v sobotu večer/po svátcích)</li>
+                    </ul>
+                    <p>Všechny časy se automaticky aktualizují na základě vaší GPS polohy a aktuálního data.</p>
+                </div>
+
+                <div class="guide-item">
+                    <h3>📅 Použití záložky Kalendář</h3>
+                    <h4>Zobrazení hebrejského kalendáře</h4>
+                    <p>Záložka Kalendář zobrazuje kompletní zobrazení hebrejského kalendáře s:</p>
+                    <ul>
+                        <li>Hebrejská data zobrazená vedle občanských dat</li>
+                        <li>Židovské svátky zvýrazněné barvou</li>
+                        <li>Aktuální den označený kroužkem</li>
+                        <li>Dny šabatu (soboty) speciálně označené</li>
+                    </ul>
+
+                    <h4>Zobrazení podrobností o datu</h4>
+                    <p>Klepnutím na jakékoli datum zobrazíte podrobné informace v dolním panelu:</p>
+                    <ul>
+                        <li>Úplné hebrejské datum (den, měsíc, rok)</li>
+                        <li>Parashat ha-šavua (týdenní čtení z Tóry) pro šabat</li>
+                        <li>Názvy svátků a informace</li>
+                        <li>Všechny zemany pro konkrétní datum</li>
+                        <li>Čas zapálení svíček (pokud je relevantní)</li>
+                        <li>Čas havdaly (pokud je relevantní)</li>
+                    </ul>
+
+                    <h4>Navigace v kalendáři</h4>
+                    <ul>
+                        <li>Přejeďte vlevo/vpravo pro změnu měsíců</li>
+                        <li>Klepněte na záhlaví měsíce/roku pro přechod na dnešek</li>
+                        <li>Kalendář se automaticky přizpůsobí pro Izrael vs. diasporu ve slavení svátků</li>
+                    </ul>
+                </div>
+
+                <div class="guide-item">
+                    <h3>⚙️ Nastavení a přizpůsobení</h3>
+                    <h4>Nastavení polohy</h4>
+                    <ul>
+                        <li><strong>Automatická detekce polohy:</strong> Používá GPS k automatickému určení vaší polohy</li>
+                        <li><strong>Manuální zadání GPS:</strong> Zadejte vlastní souřadnice zeměpisné šířky a délky</li>
+                        <li><strong>Výběr města:</strong> Vyberte z 38 předdefinovaných měst po celém světě</li>
+                        <li><strong>Přepínač Izrael/diaspora:</strong> Ručně přepište automatickou detekci (ovlivňuje délku svátků a plán parašot)</li>
+                    </ul>
+
+                    <h4>Nastavení zobrazení</h4>
+                    <ul>
+                        <li><strong>Latinské názvy měsíců:</strong> Zobrazit měsíce v angličtině místo hebrejské transliterace</li>
+                        <li><strong>Arabské číslice:</strong> Zobrazit čísla dní pomocí arabských číslic (1, 2, 3...) místo hebrejských číslic (א׳, ב׳, ג׳...)</li>
+                        <li><strong>Motiv:</strong> Automaticky následuje systémový tmavý/světlý režim</li>
+                    </ul>
+
+                    <h4>Nastavení notifikací</h4>
+                    <ul>
+                        <li>Povolit/zakázat notifikace šabatu</li>
+                        <li>Povolit/zakázat notifikace svátků</li>
+                        <li>Notifikace odesílány 24 hodin a 30 minut před časem zapálení svíček</li>
+                    </ul>
+                </div>
+
+                <div class="guide-item">
+                    <h3>🎨 Změna motivů hodin</h3>
+                    <p>Hebrew Time obsahuje 5 krásných motivů hodin. Pro změnu motivu:</p>
+                    <ul>
+                        <li>Otevřete aplikaci a přejděte na záložku "Motivy"</li>
+                        <li>Procházejte dostupné motivy s živým náhledem</li>
+                        <li>Klepněte na jakýkoli motiv pro jeho okamžité použití</li>
+                        <li>Widget na vaší domovské obrazovce se okamžitě aktualizuje</li>
+                        <li>Některé motivy vyžadují prémiové odemčení (jednorázový nákup za $4.99)</li>
+                    </ul>
+                </div>
+
+                <div class="guide-item">
+                    <h3>💎 Prémiové funkce</h3>
+                    <p>Odemkněte všechny funkce pomocí jednorázového nákupu za $4.99:</p>
+                    <ul>
+                        <li>Přístup ke všem 5 motivům hodin</li>
+                        <li>Žádné reklamy ani propagační obsah</li>
+                        <li>Podpora budoucího vývoje</li>
+                        <li>Jednorázová platba, žádné předplatné</li>
+                    </ul>
+                    <p>Pro upgrade na prémium:</p>
+                    <ul>
+                        <li>Přejděte na záložku "Info"</li>
+                        <li>Klepněte na "Upgradovat na prémium"</li>
+                        <li>Dokončete nákup prostřednictvím Google Play Billing</li>
+                        <li>Prémiové funkce se okamžitě odemknou</li>
+                    </ul>
+                </div>
+
+                <div class="guide-item">
+                    <h3>❓ Řešení problémů</h3>
+                    <h4>Widget se neaktualizuje</h4>
+                    <ul>
+                        <li>Zkontrolujte, zda je optimalizace baterie pro Hebrew Time vypnutá v nastavení systému</li>
+                        <li>Ujistěte se, že je uděleno oprávnění k poloze</li>
+                        <li>Odeberte a znovu přidejte widget na domovskou obrazovku</li>
+                    </ul>
+
+                    <h4>Nesprávné zemany</h4>
+                    <ul>
+                        <li>Ověřte, že je vaše poloha správná v záložce Nastavení</li>
+                        <li>Zkontrolujte, zda nastavení Izrael/diaspora odpovídá vaší skutečné poloze</li>
+                        <li>Ujistěte se, že čas a časové pásmo zařízení jsou správné</li>
+                    </ul>
+
+                    <h4>Chybějící svátky nebo nesprávná paraša</h4>
+                    <ul>
+                        <li>Zkontrolujte nastavení Izrael/diaspora (svátky a plán parašot se liší)</li>
+                        <li>Ověřte, že hebrejský rok v kalendáři je správný</li>
+                    </ul>
+
+                    <h4>Obavy ohledně baterie</h4>
+                    <p>Hebrew Time je optimalizován pro efektivitu baterie:</p>
+                    <ul>
+                        <li>Aktualizuje se pouze při zapnuté obrazovce</li>
+                        <li>Používá AlarmManager pro naplánované aktualizace při vypnuté obrazovce</li>
+                        <li>GPS se používá pouze při otevření aplikace, ne nepřetržitě</li>
+                        <li>Minimální zpracování na pozadí</li>
+                    </ul>
+                </div>
+
+                <div class="guide-item">
+                    <h3>📧 Podpora a kontakt</h3>
+                    <p>Potřebujete pomoc nebo máte návrhy?</p>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="mailto:hebrewtime@email.cz" style="color: var(--primary-color);">hebrewtime@email.cz</a></li>
+                        <li><strong>Zásady ochrany osobních údajů:</strong> <a href="privacy-policy.html" style="color: var(--primary-color);">Zobrazit zásady ochrany osobních údajů</a> (Aktualizováno 1. ledna 2026)</li>
+                    </ul>
+                    <p>Obvykle odpovídáme do 24-48 hodin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="stahnout" class="download-section">
+        <div class="container">
+            <h2>Stáhnout Hebrew Time</h2>
+            <p style="color: var(--text-gray); margin-bottom: 2rem;">Dostupné na Androidu 7.0 a vyšším</p>
+            <div class="download-badges">
+                <a href="#" class="badge">
+                    <svg width="24" height="24" style="vertical-align: middle; margin-right: 8px;" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                    </svg>
+                    Brzy na Google Play
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Eliáš Sidon. Všechna práva vyhrazena.</p>
+            <p>
+                <a href="privacy-policy.html">Zásady ochrany osobních údajů</a> |
+                <a href="podminky-uzivani.html">Podmínky používání</a> |
+                <a href="mailto:hebrewtime@email.cz">Kontakt</a> |
+                <a href="index.html">🇬🇧 English version</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const menuLinks = navLinks.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
