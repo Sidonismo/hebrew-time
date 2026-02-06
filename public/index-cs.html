@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-language" content="cs">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
 <link rel="preload" as="image" href="assets/logo.webp">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9661F67W99"></script>
@@ -13,13 +21,61 @@
 
   gtag('config', 'G-9661F67W99');
 </script>
-<meta name="description" content="Hebrew Time - Inovativní Android widget s hebrejským kalendářem, analogovými hodinami s hebrejskými číslicemi a přesnými halachickými časy (zemanim)">
-    <meta name="keywords" content="Hebrejský kalendář, židovský kalendář, zemanim, halachické časy, hebrejský widget, Android, časy šabatu">
+<meta name="description" content="Hebrew Time - Android widget s hebrejským kalendářem, židovským kalendářem, hebrejskými hodinami běžícími pozpátku. Zobrazuje židovské datum, hebrejské datum a přesné halachické časy (zemanim).">
+    <meta name="keywords" content="Hebrew Time, hebrejské hodiny, hebrejský kalendář, židovský kalendář, židovské datum, hebrejské datum, zemanim, halachické časy, hebrejský widget, Android, časy šabatu, hodiny běžící pozpátku">
     <meta name="author" content="Eliáš Sidon">
+
+    <!-- Canonical & Hreflang -->
+    <link rel="canonical" href="https://hebrewtime.szidon.com/index-cs.html">
+    <link rel="alternate" hreflang="en" href="https://hebrewtime.szidon.com/index.html">
+    <link rel="alternate" hreflang="cs" href="https://hebrewtime.szidon.com/index-cs.html">
+    <link rel="alternate" hreflang="x-default" href="https://hebrewtime.szidon.com/index.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hebrewtime.szidon.com/index-cs.html">
+    <meta property="og:title" content="Hebrew Time - Hebrejské hodiny a židovský kalendář widget pro Android">
+    <meta property="og:description" content="Android widget s hebrejským kalendářem, židovským kalendářem, hebrejskými hodinami běžícími pozpátku. Zobrazuje židovské datum, hebrejské datum a přesné halachické časy (zemanim).">
+    <meta property="og:image" content="https://hebrewtime.szidon.com/assets/og-image.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Hebrew Time">
+    <meta property="og:locale" content="cs_CZ">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hebrew Time - Hebrejské hodiny a židovský kalendář widget pro Android">
+    <meta name="twitter:description" content="Android widget s hebrejským kalendářem, židovským kalendářem, hebrejskými hodinami běžícími pozpátku.">
+    <meta name="twitter:image" content="https://hebrewtime.szidon.com/assets/og-image.webp">
+
 <link rel="alternate" href="android-app://com.hebrewtime.app.balicek/https/hebrewtime.szidon.com">
-    <title>Hebrew Time - Widget s hebrejským kalendářem pro Android</title>
+    <title>Hebrew Time - Hebrejské hodiny a židovský kalendář widget pro Android</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/main.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "Hebrew Time",
+      "description": "Android widget s hebrejským kalendářem, židovským kalendářem, hebrejskými hodinami běžícími pozpátku. Zobrazuje židovské datum, hebrejské datum a přesné halachické časy (zemanim).",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Eliáš Sidon"
+      },
+      "inLanguage": ["en", "cs"],
+      "url": "https://hebrewtime.szidon.com",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.hebrewtime.app"
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -44,7 +100,7 @@
             <div class="hero-icon">
                 <img src="assets/logo.webp" alt="Hebrew Time Logo">
             </div>
-            <h1>Hebrew Time</h1>
+            <h1>Hebrew Time - Hebrejský kalendář</h1>
             <p class="slogan hero-slogan">Čas, jenž se vrací ke svému počátku</p>
             <p class="hero-subtitle">První hebrejský analogový widget s pohybem proti směru hodinových ručiček!</p>
             <p>Ultimátní widget s hebrejským kalendářem pro Android s přesnými halachickými časy (zemanim) a krásnými přizpůsobitelnými motivy.</p>
@@ -60,16 +116,21 @@
     <section class="about-origin">
         <div class="container">
             <h2>O vzniku widgetu</h2>
-            <p>Můj vztah k času se formoval v úzkých uličkách pražského Josefova. Jako člen zdejší židovské komunity jsem od dětství slýchal modlitby ve Staronové synagoze a vzhlížel k věži Židovské radnice. Právě tam mě fascinoval unikátní kontrast dvou ciferníků: zatímco ty horní měřily čas „všedně“, ty spodní s hebrejskými číslicemi se od roku 1764 otáčejí zrcadlově – zprava doleva.</p>
+            <p>Můj vztah k času se formoval v úzkých uličkách pražského Josefova. Jako člen zdejší židovské komunity jsem od dětství slýchal modlitby ve Staronové synagoze a vzhlížel k věži Židovské radnice. Právě tam mě fascinoval unikátní kontrast dvou ciferníků: zatímco ty horní měřily čas „všedně", ty spodní s hebrejskými číslicemi se od roku 1764 otáčejí zrcadlově – zprava doleva.</p>
 
-            <p>Tento „obrácený“ pohyb ručiček, kopírující směr hebrejského písma, pro mě vždy symbolizoval, že čas nemusí jen ubíhat, ale může nás i vracet ke kořenům. Když jsem začal vyvíjet aplikace, chtěl jsem tuhle pražskou magii přenést do moderní podoby. Můj Android widget tak vznikl jako digitální pocta těmto slavným hodinám a pražské židovské obci.</p>
+            <figure class="town-hall-photo">
+                <img src="assets/jewish-town-hall-prague.webp" alt="Židovská radnice v Praze se slavnými hebrejskými hodinami" loading="lazy">
+                <figcaption>Židovská radnice v Praze s unikátními hebrejskými hodinami, které běží proti směru hodinových ručiček</figcaption>
+            </figure>
+
+            <p>Tento „obrácený" pohyb ručiček, kopírující směr hebrejského písma, pro mě vždy symbolizoval, že čas nemusí jen ubíhat, ale může nás i vracet ke kořenům. Když jsem začal vyvíjet aplikace, chtěl jsem tuhle pražskou magii přenést do moderní podoby. Můj Android widget tak vznikl jako digitální pocta těmto slavným hodinám a pražské židovské obci.</p>
         </div>
     </section>
 
     <!-- Features Section -->
     <section id="funkce">
         <div class="container">
-            <h2>Funkce</h2>
+            <h2>Funkce hebrejských hodin a kalendáře</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🕐</div>
@@ -159,7 +220,7 @@
     <!-- User Guide Section -->
     <section id="navod" class="guide-section">
         <div class="container">
-            <h2>Uživatelský návod</h2>
+            <h2>Návod k hebrejským hodinám a židovskému kalendáři</h2>
             <div class="guide-content">
 
                 <div class="guide-item">
@@ -206,8 +267,8 @@
                 </div>
 
                 <div class="guide-item">
-                    <h3>📅 Použití záložky Kalendář</h3>
-                    <h4>Zobrazení hebrejského kalendáře</h4>
+                    <h3>📅 Použití hebrejského kalendáře a židovských dat</h3>
+                    <h4>Zobrazení hebrejského kalendáře a židovských dat</h4>
                     <p>Záložka Kalendář zobrazuje kompletní zobrazení hebrejského kalendáře s:</p>
                     <ul>
                         <li>Hebrejská data zobrazená vedle občanských dat</li>

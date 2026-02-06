@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-language" content="en">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <link rel="preload" as="image" href="assets/logo.webp">
     <!-- Google tag (gtag.js) -->
@@ -15,14 +22,62 @@
         gtag('config', 'G-9661F67W99');
     </script>
     <meta name="description"
-        content="Hebrew Time - An innovative Android widget with Hebrew calendar, analog clock with Hebrew numerals, and precise halachic times (zemanim)">
+        content="Hebrew Time - Android widget with Hebrew calendar, Jewish calendar, Hebrew clock with counter-clockwise motion. Display Jewish date, Hebrew date, and precise halachic times (zemanim).">
     <meta name="keywords"
-        content="Hebrew calendar, Jewish calendar, zemanim, halachic times, Hebrew widget, Android, Shabbat times">
+        content="Hebrew Time, Hebrew clock, Hebrew calendar, Jewish calendar, Jewish date, Hebrew date, zemanim, halachic times, Hebrew widget, Android, Shabbat times, counter-clockwise clock">
     <meta name="author" content="Eliáš Sidon">
+
+    <!-- Canonical & Hreflang -->
+    <link rel="canonical" href="https://hebrewtime.szidon.com/index.html">
+    <link rel="alternate" hreflang="en" href="https://hebrewtime.szidon.com/index.html">
+    <link rel="alternate" hreflang="cs" href="https://hebrewtime.szidon.com/index-cs.html">
+    <link rel="alternate" hreflang="x-default" href="https://hebrewtime.szidon.com/index.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hebrewtime.szidon.com/">
+    <meta property="og:title" content="Hebrew Time - Hebrew Clock & Jewish Calendar Widget for Android">
+    <meta property="og:description" content="Android widget with Hebrew calendar, Jewish calendar, and Hebrew clock with counter-clockwise motion. Display Jewish date, Hebrew date, and precise halachic times (zemanim).">
+    <meta property="og:image" content="https://hebrewtime.szidon.com/assets/og-image.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Hebrew Time">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hebrew Time - Hebrew Clock & Jewish Calendar Widget for Android">
+    <meta name="twitter:description" content="Android widget with Hebrew calendar, Jewish calendar, and Hebrew clock with counter-clockwise motion.">
+    <meta name="twitter:image" content="https://hebrewtime.szidon.com/assets/og-image.webp">
+
     <link rel="alternate" href="android-app://com.hebrewtime.app.balicek/https/hebrewtime.szidon.com">
-    <title>Hebrew Time - Hebrew Calendar Widget for Android</title>
+    <title>Hebrew Time - Hebrew Clock & Jewish Calendar Widget for Android</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/main.css">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "Hebrew Time",
+      "description": "Android widget with Hebrew calendar, Jewish calendar, and Hebrew clock with counter-clockwise motion. Display Jewish date, Hebrew date, and precise halachic times (zemanim).",
+      "operatingSystem": "Android",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Eliáš Sidon"
+      },
+      "inLanguage": ["en", "cs"],
+      "url": "https://hebrewtime.szidon.com",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.hebrewtime.app"
+    }
+    </script>
 </head>
 
 <body>
@@ -48,7 +103,7 @@
             <div class="hero-icon">
                 <img src="assets/logo.webp" alt="Hebrew Time Logo" width="200" height="200" loading="eager">
             </div>
-            <h1>Hebrew Time</h1>
+            <h1>Hebrew Time - Jewish Calendar and Widget</h1>
             <p class="slogan hero-slogan">Time
                 flowing back to its beginning</p>
             <p class="hero-subtitle">The
@@ -66,11 +121,16 @@
     <section class="about-origin">
         <div class="container">
             <h2>The Story Behind the Widget</h2>
-            <p>My perception of time was shaped in the narrow alleys of Prague’s Josefov. As a member of the local
+            <p>My perception of time was shaped in the narrow alleys of Prague's Josefov. As a member of the local
                 Jewish community, I grew up listening to prayers in the Old-New Synagogue and looking up at the tower of
                 the Jewish Town Hall. I was always fascinated by the unique contrast of its two clocks: while the upper
                 ones measure time "conventionally," the lower dial with Hebrew numerals has been turning in
                 reverse—right to left—since 1764.</p>
+
+            <figure class="town-hall-photo">
+                <img src="assets/jewish-town-hall-prague.webp" alt="Jewish Town Hall in Prague with the famous Hebrew clock" loading="lazy">
+                <figcaption>The Jewish Town Hall in Prague with its unique Hebrew clock that runs counter-clockwise</figcaption>
+            </figure>
 
             <p>This "counter-clockwise" movement, mirroring the direction of the Hebrew script, has always symbolized to
                 me that time doesn't just slip away; it can also lead us back to our roots. When I started developing
@@ -82,7 +142,7 @@
     <!-- Features Section -->
     <section id="features">
         <div class="container">
-            <h2>Features</h2>
+            <h2>Hebrew Time - Hebrew Calendar & Jewish Date Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🕐</div>
@@ -182,7 +242,7 @@
     <!-- User Guide Section -->
     <section id="guide" class="guide-section">
         <div class="container">
-            <h2>User Guide</h2>
+            <h2>Hebrew Time & Calendar User Guide</h2>
             <div class="guide-content">
 
                 <div class="guide-item">
@@ -231,7 +291,7 @@
                 </div>
 
                 <div class="guide-item">
-                    <h3>📅 Using the Calendar Tab</h3>
+                    <h3>📅 Using the Hebrew Calendar & Jewish Date Tab</h3>
                     <h4>Viewing the Hebrew Calendar</h4>
                     <p>The Calendar tab shows a full Hebrew calendar view with:</p>
                     <ul>

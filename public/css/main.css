@@ -118,12 +118,13 @@ nav a:hover {
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    line-height: 1.2;
 }
 
 .hero p {
@@ -194,6 +195,44 @@ section h2 {
     text-align: center;
     margin-bottom: 3rem;
     color: var(--primary-color);
+}
+
+/* About Origin Section */
+.about-origin .container {
+    max-width: 800px;
+}
+
+.about-origin p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-gray);
+    margin-bottom: 1.5rem;
+}
+
+/* Town Hall Photo */
+.town-hall-photo {
+    margin: 2.5rem 0;
+    text-align: center;
+}
+
+.town-hall-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(255, 214, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.town-hall-photo img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(255, 214, 0, 0.3);
+}
+
+.town-hall-photo figcaption {
+    margin-top: 1rem;
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    font-style: italic;
 }
 
 /* Features Grid */
