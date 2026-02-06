@@ -4,536 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preload" as="image" href="assets/logo.webp">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9661F67W99"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-9661F67W99');
+    </script>
     <meta name="description"
         content="Hebrew Time - An innovative Android widget with Hebrew calendar, analog clock with Hebrew numerals, and precise halachic times (zemanim)">
     <meta name="keywords"
         content="Hebrew calendar, Jewish calendar, zemanim, halachic times, Hebrew widget, Android, Shabbat times">
     <meta name="author" content="Eliáš Sidon">
+    <link rel="alternate" href="android-app://com.hebrewtime.app.balicek/https/hebrewtime.szidon.com">
     <title>Hebrew Time - Hebrew Calendar Widget for Android</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #FFD600;
-            --secondary-color: #FFEA00;
-            --dark-bg: #1a1a2e;
-            --darker-bg: #0f0f1e;
-            --text-light: #ffffff;
-            --text-gray: #b0b0b0;
-            --accent-blue: #4169E1;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background: var(--darker-bg);
-        }
-
-        /* Navigation */
-        nav {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        nav .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Language Switcher */
-        .lang-switch {
-            background: var(--dark-bg);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            border: 1px solid var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 214, 0, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .hero .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-icon {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 2rem;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(255, 214, 0, 0.3);
-        }
-
-        .hero-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--darker-bg);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 5px 20px rgba(255, 214, 0, 0.4);
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 0.75rem;
-            padding: 0.5rem 0.9rem;
-            background: var(--dark-bg);
-            color: var(--primary-color);
-            border: 1px solid rgba(255,214,0,0.15);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.15s ease, transform 0.12s ease;
-        }
-
-        .back-link:hover {
-            background: rgba(255,214,0,0.06);
-            transform: translateY(-2px);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 214, 0, 0.6);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Section */
-        section {
-            padding: 4rem 2rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .feature-card {
-            background: var(--dark-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 214, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 214, 0, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .feature-card p {
-            color: var(--text-gray);
-        }
-
-        /* User Guide Section */
-        .guide-section {
-            background: var(--dark-bg);
-        }
-
-        .guide-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .guide-item {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 214, 0, 0.1);
-        }
-
-        .guide-item:last-child {
-            border-bottom: none;
-        }
-
-        .guide-item h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .guide-item h4 {
-            font-size: 1.25rem;
-            margin: 1.5rem 0 0.75rem;
-            color: var(--secondary-color);
-        }
-
-        .guide-item p {
-            color: var(--text-gray);
-            margin-bottom: 1rem;
-        }
-
-        .guide-item ul {
-            margin-left: 2rem;
-            color: var(--text-gray);
-        }
-
-        .guide-item ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .guide-item code {
-            background: var(--darker-bg);
-            padding: 0.2rem 0.5rem;
-            border-radius: 5px;
-            color: var(--secondary-color);
-            font-family: 'Courier New', monospace;
-        }
-
-        /* Download Section */
-        .download-section {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            text-align: center;
-        }
-
-        .download-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--darker-bg);
-            border: 2px solid var(--primary-color);
-            border-radius: 10px;
-            color: var(--text-light);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-
-        .badge:hover {
-            background: var(--primary-color);
-            color: var(--darker-bg);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--darker-bg);
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 214, 0, 0.2);
-        }
-
-        footer p {
-            color: var(--text-gray);
-            margin-bottom: 0.5rem;
-        }
-
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Screenshots Section */
-        .screenshots-section {
-            background: var(--darker-bg);
-        }
-
-        .screenshots-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 2rem;
-            padding: 2rem 0;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--dark-bg);
-        }
-
-        .screenshots-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .screenshots-container::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-            border-radius: 10px;
-        }
-
-        .screenshots-container::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 10px;
-        }
-
-        .screenshot-item {
-            flex: 0 0 auto;
-            scroll-snap-align: center;
-            text-align: center;
-        }
-
-        .screenshot-item img {
-            height: 500px;
-            width: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s;
-        }
-
-        .screenshot-item img:hover {
-            transform: scale(1.05);
-        }
-
-        .screenshot-caption {
-            margin-top: 1rem;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        .mobile-menu-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            nav .container {
-                flex-wrap: wrap;
-            }
-
-            nav .nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                gap: 0.5rem;
-                padding: 1rem 0;
-                text-align: center;
-            }
-
-            nav .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .lang-switch {
-                margin-left: auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-            }
-
-            .hero {
-                padding: 3rem 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .hero p.slogan {
-                font-size: 1.2rem;
-            }
-
-            .hero-icon {
-                width: 120px;
-                height: 120px;
-            }
-
-            section {
-                padding: 3rem 1rem;
-            }
-
-            section h2 {
-                font-size: 1.75rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .screenshot-item img {
-                height: 350px;
-            }
-
-            .guide-item h3 {
-                font-size: 1.5rem;
-            }
-
-            .guide-item h4 {
-                font-size: 1.1rem;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.75rem;
-            }
-
-            .hero p.slogan {
-                font-size: 1rem;
-            }
-
-            section h2 {
-                font-size: 1.5rem;
-            }
-
-            .screenshot-item img {
-                height: 300px;
-            }
-
-            .cta-button {
-                padding: 0.875rem 1.5rem;
-                font-size: 1rem;
-            }
-
-            .feature-icon {
-                font-size: 2.5rem;
-            }
-
-            nav .logo {
-                font-size: 1.25rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
@@ -557,13 +46,12 @@
     <section class="hero">
         <div class="container">
             <div class="hero-icon">
-                <img src="assets/logo.png" alt="Hebrew Time Logo">
+                <img src="assets/logo.webp" alt="Hebrew Time Logo" width="200" height="200" loading="eager">
             </div>
             <h1>Hebrew Time</h1>
-            <p class="slogan"
-                style="font-size: 1.5rem; font-style: italic; color: var(--primary-color); margin-bottom: 1rem;">Time
+            <p class="slogan hero-slogan">Time
                 flowing back to its beginning</p>
-            <p style="font-size: 1.2rem; font-weight: bold; color: var(--secondary-color); margin-bottom: 1rem;">The
+            <p class="hero-subtitle">The
                 first Hebrew analog clock widget with counter-clockwise motion!</p>
             <p>The ultimate Hebrew calendar widget for Android with precise halachic times (zemanim) and beautiful
                 customizable skins.</p>
@@ -578,9 +66,16 @@
     <section class="about-origin">
         <div class="container">
             <h2>The Story Behind the Widget</h2>
-            <p>My perception of time was shaped in the narrow alleys of Prague’s Josefov. As a member of the local Jewish community, I grew up listening to prayers in the Old-New Synagogue and looking up at the tower of the Jewish Town Hall. I was always fascinated by the unique contrast of its two clocks: while the upper ones measure time "conventionally," the lower dial with Hebrew numerals has been turning in reverse—right to left—since 1764.</p>
+            <p>My perception of time was shaped in the narrow alleys of Prague’s Josefov. As a member of the local
+                Jewish community, I grew up listening to prayers in the Old-New Synagogue and looking up at the tower of
+                the Jewish Town Hall. I was always fascinated by the unique contrast of its two clocks: while the upper
+                ones measure time "conventionally," the lower dial with Hebrew numerals has been turning in
+                reverse—right to left—since 1764.</p>
 
-            <p>This "counter-clockwise" movement, mirroring the direction of the Hebrew script, has always symbolized to me that time doesn't just slip away; it can also lead us back to our roots. When I started developing apps, I wanted to translate this Prague magic into a modern form. My Android widget was thus created as a digital tribute to these famous clocks and the Prague Jewish community.</p>
+            <p>This "counter-clockwise" movement, mirroring the direction of the Hebrew script, has always symbolized to
+                me that time doesn't just slip away; it can also lead us back to our roots. When I started developing
+                apps, I wanted to translate this Prague magic into a modern form. My Android widget was thus created as
+                a digital tribute to these famous clocks and the Prague Jewish community.</p>
         </div>
     </section>
 
@@ -652,31 +147,32 @@
     <section id="screenshots" class="screenshots-section">
         <div class="container">
             <h2>See Hebrew Time in Action</h2>
-            <p style="text-align: center; color: var(--text-gray); margin-bottom: 2rem;">Swipe through to explore all
+            <p class="screenshots-intro">Swipe through to explore all
                 features</p>
             <div class="screenshots-container">
                 <div class="screenshot-item">
-                    <img src="assets/hebrewtime/Screenshot_20251229-194459.png" alt="Hebrew Time Widget on Home Screen">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194459.webp"
+                        alt="Hebrew Time Widget on Home Screen">
                     <p class="screenshot-caption">Widget on Home Screen</p>
                 </div>
                 <div class="screenshot-item">
-                    <img src="assets/hebrewtime/Screenshot_20251229-194509.png" alt="Zemanim - Halachic Times">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194509.webp" alt="Zemanim - Halachic Times">
                     <p class="screenshot-caption">Zemanim - Halachic Times</p>
                 </div>
                 <div class="screenshot-item">
-                    <img src="assets/hebrewtime/Screenshot_20251229-194522.png" alt="Hebrew Calendar with Holidays">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194522.webp" alt="Hebrew Calendar with Holidays">
                     <p class="screenshot-caption">Hebrew Calendar with Holidays</p>
                 </div>
                 <div class="screenshot-item">
-                    <img src="assets/hebrewtime/Screenshot_20251229-194552.png" alt="Calendar Date Details">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194552.webp" alt="Calendar Date Details">
                     <p class="screenshot-caption">Date Details with Zemanim</p>
                 </div>
                 <div class="screenshot-item">
-                    <img src="assets/hebrewtime/Screenshot_20251229-194610.png" alt="5 Clock Skins to Choose From">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194610.webp" alt="5 Clock Skins to Choose From">
                     <p class="screenshot-caption">5 Beautiful Clock Skins</p>
                 </div>
                 <div class="screenshot-item">
-                    <img src="assets/hebrewtime/Screenshot_20251229-194818.png" alt="Hebrew Time Widget Display">
+                    <img src="assets/hebrewtime/Screenshot_20251229-194818.webp" alt="Hebrew Time Widget Display">
                     <p class="screenshot-caption">Counter-Clockwise Hebrew Clock</p>
                 </div>
             </div>
@@ -860,9 +356,9 @@
                     <p>Need help or have suggestions?</p>
                     <ul>
                         <li><strong>Email:</strong> <a href="mailto:hebrewtime@email.cz"
-                                style="color: var(--primary-color);">hebrewtime@email.cz</a></li>
+                                class="link-primary">hebrewtime@email.cz</a></li>
                         <li><strong>Privacy Policy:</strong> <a href="privacy-policy.html"
-                                style="color: var(--primary-color);">View Privacy Policy</a> (Last updated January 01,
+                                class="link-primary">View Privacy Policy</a> (Last updated January 01,
                             2026)</li>
                     </ul>
                     <p>We typically respond within 24-48 hours.</p>
@@ -875,10 +371,12 @@
     <section id="download" class="download-section">
         <div class="container">
             <h2>Now on Google Play!</h2>
-            <p style="color: var(--text-gray); margin-bottom: 2rem;">Available on Android 7.0 and above</p>
+            <p class="download-intro">Available on Android 7.0 and above</p>
             <div class="download-badges">
-                <a href="https://play.google.com/store/apps/details?id=com.hebrewtime.app" class="badge">
-                    <svg width="24" height="24" style="vertical-align: middle; margin-right: 8px;" viewBox="0 0 24 24"
+                <a href="https://play.google.com/store/apps/details?id=com.hebrewtime.app"
+                    onclick="gtag('event', 'click_app_button', { 'event_category': 'conversion', 'transport_type': 'beacon' });"
+                    class="badge">
+                    <svg width="24" height="24" class="svg-icon-inline" viewBox="0 0 24 24"
                         fill="currentColor">
                         <path
                             d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />

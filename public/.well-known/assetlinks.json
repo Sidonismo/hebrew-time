@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.hebrewtime.app",
+    "sha256_cert_fingerprints": ["6C:D6:E1:FD:88:67:1B:94:4F:F8:F7:70:31:8E:B3:13:A5:34:78:E5:3D:46:F7:2C:45:C9:77:68:BD:43:23:C6"]
+  }
+}]

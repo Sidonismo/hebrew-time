@@ -1,0 +1,135 @@
+/* Legal pages styles - for privacy-policy.html, terms-and-conditions.html, podminky-uzivani.html */
+
+/* Header */
+header {
+    background: rgba(26, 26, 46, 0.95);
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--text-gray);
+}
+
+.container {
+    padding: 3rem 2rem;
+}
+
+/* Typography */
+h2 {
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    margin: 2rem 0 1rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin: 1.5rem 0 0.75rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-gray);
+}
+
+ul, ol {
+    margin: 1rem 0 1rem 2rem;
+    color: var(--text-gray);
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+strong {
+    color: var(--text-light);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    background: var(--dark-bg);
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--dark-bg);
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid rgba(255, 214, 0, 0.2);
+}
+
+th {
+    background: rgba(255, 214, 0, 0.1);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+td {
+    color: var(--text-gray);
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 1px solid rgba(255, 214, 0, 0.2);
+    margin: 2rem 0;
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 2rem 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}
